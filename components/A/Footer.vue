@@ -4,6 +4,7 @@
       class="dark:bg-neutral-50 rounded-lg"
       to="https://github.com/yeonjulee1005"
       external
+      name="github"
     >
       <Icon
         name="devicon:github"
@@ -14,6 +15,7 @@
     <NuxtLink
       to="https://www.linkedin.com/in/dewdew/"
       external
+      name="linkedin"
     >
       <Icon
         name="devicon:linkedin"

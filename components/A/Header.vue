@@ -40,7 +40,7 @@ const moveBack = () => {
       src="https://i.balaan.io/mobile/img/icons/logo-blue.png"
       preload
       :width="desktop ? 200 : 100"
-      height="auto"
+      :height="desktop ? 36: 18"
       :draggable="false"
       alt="logo"
     />
