@@ -47,6 +47,19 @@ export default defineNuxtConfig({
     defaultLocale: 'ko',
     strategy: 'no_prefix'
   },
+
+  vite: {
+    build: {
+      sourcemap: true,
+      cssMinify: true,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true
+        }
+      }
+    }
+  },
   pinia: {
     storesDirs: [
       './stores/**'

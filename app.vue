@@ -1,3 +1,23 @@
+<script setup lang="ts">
+
+if (process.server) {
+  useHead({
+    title: '발란 FE 회원가입 과제',
+    htmlAttrs: {
+      lang: 'ko'
+    },
+    meta: () => [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, viewport-fit=cover' },
+      { name: 'author', content: 'Dewdew' },
+      { name: 'description', content: '발란 FE 회원가입 과제' },
+      { name: 'keywords', content: 'Balan' }
+    ]
+  })
+}
+
+</script>
+
 <template>
   <div>
     <NuxtLayout>
@@ -12,13 +32,3 @@
     </NuxtLayout>
   </div>
 </template>
-
-<script setup lang="ts">
-
-useSeoMeta({
-  title: '발란 FE 회원가입 과제',
-  description: '발란 FE 회원가입 과제',
-  keywords: 'Balan'
-})
-
-</script>
