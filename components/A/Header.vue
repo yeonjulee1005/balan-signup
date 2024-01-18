@@ -9,10 +9,22 @@ const desktop = computed(() => {
   return width.value > 500
 })
 
+const getStepFromRoute = (route: string) => parseInt(route.split('/')[2])
+
 const moveBack = () => {
-  if (prevRoute.value === currRoute.value) {
+  const prevStep = getStepFromRoute(prevRoute.value)
+  const isSameRoute = prevRoute.value === currRoute.value
+  const isPrevStepHigher = prevStep > 2
+  const isFirstSignupStep = signupStep.value === 1
+  const isPrevStepLower = getStepFromRoute(prevRoute.value) > getStepFromRoute(currRoute.value)
+
+  const resetSignupAndNavigateHome = () => {
     signupStep.value = 0
     navigateTo('/')
+  }
+
+  if (isSameRoute || isPrevStepHigher || isFirstSignupStep || isPrevStepLower) {
+    resetSignupAndNavigateHome()
   } else {
     signupStep.value--
     navigateTo(prevRoute.value)

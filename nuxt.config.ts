@@ -24,8 +24,7 @@ export default defineNuxtConfig({
     '~/styles/index.scss'
   ],
   ui: {
-    prefix: 'BL',
-    icons: ['line-md']
+    prefix: 'BL'
   },
   components: [
     {

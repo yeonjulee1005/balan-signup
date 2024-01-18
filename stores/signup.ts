@@ -9,7 +9,8 @@ export const useSignupStore = defineStore('signup', () => {
   const password = ref<string>('')
   const passwordConfirm = ref<string>('')
   const address = ref<string>('')
-  const cardNumber = ref<string>('')
+  const cardNumArray = ref<number[]>([0, 0, 0, 0])
+  const cardCombination = ref<string>('')
 
   const privacyConfirm = ref<boolean>(false)
   const shippingConfirm = ref<boolean>(false)
@@ -23,7 +24,8 @@ export const useSignupStore = defineStore('signup', () => {
     password,
     passwordConfirm,
     address,
-    cardNumber,
+    cardNumArray,
+    cardCombination,
     privacyConfirm,
     shippingConfirm,
     paymentConfirm

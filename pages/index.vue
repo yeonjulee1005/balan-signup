@@ -1,3 +1,14 @@
+<script setup lang="ts">
+
+const { signupStep } = storeToRefs(useSignupStore())
+
+const moveToSignupStep = () => {
+  signupStep.value++
+  navigateTo(`/signup/${signupStep.value}`)
+}
+
+</script>
+
 <template>
   <div class="flex h-screen flex-col items-center justify-center gap-8">
     <p class="text-4xl font-bold">
@@ -15,14 +26,3 @@
     <AFooter />
   </div>
 </template>
-
-<script setup lang="ts">
-
-const { signupStep } = storeToRefs(useSignupStore())
-
-const moveToSignupStep = () => {
-  signupStep.value++
-  navigateTo(`/signup/${signupStep.value}`)
-}
-
-</script>
