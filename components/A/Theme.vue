@@ -14,19 +14,13 @@ const isDark = computed({
 </script>
 
 <template>
-  <BLButton
-    color="indigo"
-    size="md"
-    variant="outline"
-    aria-label="theme"
-    @click="isDark = !isDark"
-  >
-    <template #leading>
-      <Icon
-        :name="isDark ? 'line-md:moon-filled-loop' : 'line-md:moon-filled-alt-to-sunny-filled-loop-transition'"
-        :width="24"
-        :height="24"
-      />
-    </template>
-  </BLButton>
+  <AButton
+    button-size="md"
+    button-variant="outline"
+    button-aria-label="theme"
+    use-icon
+    :icon-name="isDark ? 'line-md:moon-filled-loop' : 'line-md:moon-filled-alt-to-sunny-filled-loop-transition'"
+    :icon-size="24"
+    @click:bl-button="isDark = !isDark"
+  />
 </template>

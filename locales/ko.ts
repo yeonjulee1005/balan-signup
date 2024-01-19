@@ -11,6 +11,8 @@ export default {
   },
   button: {
     signup: '회원가입',
+    address: '주소 검색',
+    close: '닫기',
     back: '뒤로가기',
     next: '다음'
   },
@@ -20,8 +22,16 @@ export default {
     passwordConfirm: '비밀번호 확인',
     name: '이름',
     address: '주소',
+    addressSearch: '주소 검색',
     mobile: '휴대폰 번호',
     card: '카드 번호'
+  },
+  success: {
+    title: '"{name}"님, 회원가입이 완료되었습니다.',
+    email: '이메일: {email}',
+    address: '주소: {address}',
+    mobile: '연락처: {mobile}',
+    card: '카드번호: {card}'
   },
   message: {
     emailRequired: '이메일을 입력해주세요.',
@@ -34,13 +44,15 @@ export default {
     nameFormat: '2글자 이상의 한글이어야 하며, 3글자 이상의 영문이어야 합니다.',
     nameSpecialFormat: '특수문자 및 숫자, 공백은 입력 할 수 없습니다.',
     mobileRequired: '휴대폰 번호를 입력해주세요.',
-    mobileLength: '휴대폰 번호는 10 또는 11자리여야 합니다.',
+    mobileLength: '휴대폰 번호는 10 또는 11자리 이어야 합니다.',
     mobileFormat: '휴대폰 번호는 숫자 및 하이픈만 입력 가능합니다.',
     cardRequired: '카드 번호를 입력해주세요.',
     cardLength: '카드 번호는 16자리여야 합니다.',
-    cardFormat: '카드 번호는 숫자만 입력 가능합니다.',
-    cardVerified: '카드 번호가 유효합니다.',
+    cardVerified: '카드 번호가 유효하지 않습니다.',
     addressRequired: '주소를 입력해주세요.',
-    verifyPolicy: '개인정보가 저장되었어요!'
+    addressSearch: '상단 주소가 비었어요.',
+    verifyPolicy: '개인정보가 저장되었어요!',
+    verifyShipping: '배송지 정보가 저장되었어요!',
+    verifyPayment: '결제 정보가 저장되었어요!'
   }
 }

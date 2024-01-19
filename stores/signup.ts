@@ -8,13 +8,37 @@ export const useSignupStore = defineStore('signup', () => {
   const email = ref<string>('')
   const password = ref<string>('')
   const passwordConfirm = ref<string>('')
-  const address = ref<string>('')
-  const cardNumArray = ref<number[]>([0, 0, 0, 0])
-  const cardCombination = ref<string>('')
+
+  const firstAddress = ref<string>('')
+  const secondAddress = ref<string>('')
+  const address = computed<string>(() => `${firstAddress.value} ${secondAddress.value}`)
+
+  const firstCardNum = ref<string>('')
+  const secondCardNum = ref<string>('')
+  const thirdCardNum = ref<string>('')
+  const fourthCardNum = ref<string>('')
+  const cardCombination = computed<string>(() => `${firstCardNum.value}-${secondCardNum.value}-${thirdCardNum.value}-${fourthCardNum.value}`)
 
   const privacyConfirm = ref<boolean>(false)
   const shippingConfirm = ref<boolean>(false)
   const paymentConfirm = ref<boolean>(false)
+
+  const initSignupStore = () => {
+    name.value = ''
+    mobile.value = ''
+    email.value = ''
+    password.value = ''
+    passwordConfirm.value = ''
+    firstAddress.value = ''
+    secondAddress.value = ''
+    firstCardNum.value = ''
+    secondCardNum.value = ''
+    thirdCardNum.value = ''
+    fourthCardNum.value = ''
+    privacyConfirm.value = false
+    shippingConfirm.value = false
+    paymentConfirm.value = false
+  }
 
   return {
     signupStep,
@@ -23,12 +47,18 @@ export const useSignupStore = defineStore('signup', () => {
     email,
     password,
     passwordConfirm,
+    firstAddress,
+    secondAddress,
     address,
-    cardNumArray,
+    firstCardNum,
+    secondCardNum,
+    thirdCardNum,
+    fourthCardNum,
     cardCombination,
     privacyConfirm,
     shippingConfirm,
-    paymentConfirm
+    paymentConfirm,
+    initSignupStore
   }
 }, {
   persist: {
