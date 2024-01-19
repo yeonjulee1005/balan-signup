@@ -11,6 +11,8 @@ export default {
   },
   button: {
     signup: 'Sign Up',
+    address: 'Address Search',
+    close: 'Close',
     back: 'Back',
     next: 'Next'
   },
@@ -20,8 +22,16 @@ export default {
     passwordConfirm: 'Password Confirmation',
     name: 'Name',
     address: 'Address',
+    addressSearch: 'Address Search',
     mobile: 'Mobile Number',
     card: 'Card Number'
+  },
+  success: {
+    title: 'Congratulations, "{name}", you have successfully signed up.',
+    email: 'Email: {email}',
+    address: 'Address: {address}',
+    mobile: 'Mobile Number: {mobile}',
+    card: 'Card Number: {card}'
   },
   message: {
     emailRequired: 'Please enter your email.',
@@ -38,9 +48,11 @@ export default {
     mobileFormat: 'Mobile number can only include numbers and hyphens.',
     cardRequired: 'Please enter your card number.',
     cardLength: 'Card number must be 16 digits long.',
-    cardFormat: 'Card number can only include numbers.',
-    cardVerified: 'Card number is valid.',
+    cardVerified: 'Card number is not valid.',
     addressRequired: 'Please enter your address.',
-    verifyPolicy: 'Personal information has been saved!'
+    addressSearch: 'Please search for the address.',
+    verifyPolicy: 'Personal information has been saved!',
+    verifyShipping: 'Shipping information has been saved!',
+    verifyPayment: 'Payment information has been saved!'
   }
 }

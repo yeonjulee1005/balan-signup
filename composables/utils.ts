@@ -1,8 +1,12 @@
+import type { NotificationColor } from '@nuxt/ui/dist/runtime/types/notification'
+
 export const useUtils = () => {
+  const toast = useToast()
+
   const { signupStep } = storeToRefs(useSignupStore())
 
   // 한글 완성형 2자 이상의 및 영문 3자 이상의 정규식
-  const nameRegex = /[\uAC00-\uD7A3]{2,}|[a-zA-Z]{3,}/
+  const nameRegex = /^([가-힣]{2,}|[A-Za-z]{3,})$/
 
   // 이메일 정규일
   const emailRegex = /^([0-9a-zA-Z_.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/
@@ -18,11 +22,23 @@ export const useUtils = () => {
     navigateTo(`/signup/${signupStep.value}`)
   }
 
+  const displayToast = (message: string, color: NotificationColor, timeout: number) => {
+    toast.add({ title: message, color, timeout })
+  }
+
+  const limitTextLength = (text: string, limit: number) => {
+    return text.length > limit
+      ? text.slice(0, limit)
+      : text
+  }
+
   return {
     nameRegex,
     emailRegex,
     passwordRegex,
     mobileRegex,
-    navigateToNNextStep
+    navigateToNNextStep,
+    displayToast,
+    limitTextLength
   }
 }

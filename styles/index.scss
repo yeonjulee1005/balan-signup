@@ -8,10 +8,10 @@ body {
 
 .balan-enter-active,
 .balan-leave-active {
-  transition: all .1s ease-in-out;
+  transition: all .1s ease-in;
 }
 
 .balan-enter-from,
 .balan-leave-to {
-  opacity: .3;
+  opacity: .1;
 }

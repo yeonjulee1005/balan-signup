@@ -1,3 +1,68 @@
+<script setup lang="ts">
+import { object, string, type InferType } from 'yup'
+import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
+
+const { t } = useI18n()
+
+const { email, password, passwordConfirm, privacyConfirm } = storeToRefs(useSignupStore())
+const { emailRegex, passwordRegex, navigateToNNextStep, displayToast } = useUtils()
+
+const privacySchema = object({
+  email: string()
+    .required(t('message.emailRequired'))
+    .matches(emailRegex, t('message.emailFormat')),
+  password: string()
+    .required(t('message.passwordRequired'))
+    .matches(passwordRegex, t('message.passwordFormat')),
+  passwordConfirm: string()
+    .required(t('message.passwordRequired'))
+    .test('passwordConfirmMatch', t('message.passwordConfirmMatch'), (value) => {
+      return matchPassword(value)
+    })
+})
+
+const matchPassword = (passwordConfirm: string) => {
+  const isMatch = passwordConfirm === formData.password
+  return isMatch
+}
+
+const formData: SignupFormData = reactive({
+  email: email.value,
+  password: password.value,
+  passwordConfirm: passwordConfirm.value
+})
+
+const submitTrigger = computed({
+  get: () => {
+    return !privacySchema.isValidSync(formData)
+  },
+  set: (value) => {
+    return value
+  }
+})
+
+type Schema = InferType<typeof privacySchema>
+
+const onSubmit = (event: FormSubmitEvent<Schema>) => {
+  if (!event.isTrusted) { return }
+  nextTick(updateValuesAndNavigate)
+}
+
+const updateValuesAndNavigate = () => {
+  updateFormValues()
+  displayToast(t('message.verifyPolicy'), 'indigo', 3000)
+  privacyConfirm.value = true
+  navigateToNNextStep()
+}
+
+const updateFormValues = () => {
+  email.value = formData.email.toString()
+  password.value = formData.password.toString()
+  passwordConfirm.value = formData.passwordConfirm.toString()
+}
+
+</script>
+
 <template>
   <BLForm
     :schema="privacySchema"
@@ -47,78 +112,11 @@
         aria-label="email"
       />
     </BLFormGroup>
-    <BLButton
-      color="indigo"
-      size="xl"
-      block
-      variant="soft"
-      type="submit"
-      :disabled="submitTrigger"
-    >
-      {{ $t('button.next') }}
-    </BLButton>
+    <AButton
+      button-block
+      button-type="submit"
+      :button-disabled="submitTrigger"
+      :button-text="$t('button.next')"
+    />
   </BLForm>
 </template>
-
-<script setup lang="ts">
-import { object, string, type InferType } from 'yup'
-import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types'
-
-const toast = useToast()
-const { t } = useI18n()
-
-const { email, password, passwordConfirm } = storeToRefs(useSignupStore())
-const { emailRegex, passwordRegex, navigateToNNextStep } = useUtils()
-
-const privacySchema = object({
-  email: string()
-    .required(t('message.emailRequired'))
-    .matches(emailRegex, t('message.emailFormat')),
-  password: string()
-    .required(t('message.passwordRequired'))
-    .matches(passwordRegex, t('message.passwordFormat')),
-  passwordConfirm: string()
-    .required(t('message.passwordRequired'))
-    .test('passwordConfirmMatch', t('message.passwordConfirmMatch'), (value) => {
-      return matchPassword(value)
-    })
-})
-
-const matchPassword = (passwordConfirm: string) => {
-  const isMatch = passwordConfirm === formData.password
-  submitTrigger.value = !isMatch
-  return isMatch
-}
-
-const formData = reactive({
-  email: '',
-  password: '',
-  passwordConfirm: ''
-})
-
-const submitTrigger = ref(true)
-
-type Schema = InferType<typeof privacySchema>
-
-const onSubmit = async (event: FormSubmitEvent<Schema>) => {
-  if (!event.isTrusted) { return }
-  await nextTick(updateValuesAndNavigate)
-}
-
-const updateValuesAndNavigate = async () => {
-  updateFormValues()
-  await showPolicyToast()
-  navigateToNNextStep()
-}
-
-const updateFormValues = () => {
-  email.value = formData.email
-  password.value = formData.password
-  passwordConfirm.value = formData.passwordConfirm
-}
-
-const showPolicyToast = async () => {
-  await toast.add({ title: t('message.verifyPolicy'), color: 'indigo', timeout: 3000 })
-}
-
-</script>

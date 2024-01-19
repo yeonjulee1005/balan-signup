@@ -12,6 +12,11 @@ if (process.server) {
       { name: 'author', content: 'Dewdew' },
       { name: 'description', content: '발란 FE 회원가입 과제' },
       { name: 'keywords', content: 'Balan' }
+    ],
+    script: [
+      {
+        src: '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'
+      }
     ]
   })
 }
@@ -19,16 +24,14 @@ if (process.server) {
 </script>
 
 <template>
-  <div>
-    <NuxtLayout>
-      <template #signup>
-        <NuxtLoadingIndicator
-          :height="10"
-          color="repeating-linear-gradient(to right,#F9F9F9 0%,#11069E 100%)"
-        />
-        <NuxtPage />
-        <BLNotifications />
-      </template>
-    </NuxtLayout>
-  </div>
+  <NuxtLayout>
+    <template #signup>
+      <NuxtLoadingIndicator
+        :height="10"
+        color="repeating-linear-gradient(to right,#F9F9F9 0%,#11069E 100%)"
+      />
+      <NuxtPage />
+      <BLNotifications />
+    </template>
+  </NuxtLayout>
 </template>

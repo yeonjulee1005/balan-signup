@@ -1,11 +1,15 @@
 <script setup lang="ts">
 
-const { signupStep } = storeToRefs(useSignupStore())
+const signupStore = useSignupStore()
+const { signupStep } = storeToRefs(signupStore)
+const { initSignupStore } = signupStore
 
 const moveToSignupStep = () => {
-  signupStep.value++
+  signupStep.value = signupStep.value ? 1 : signupStep.value + 1
   navigateTo(`/signup/${signupStep.value}`)
 }
+
+initSignupStore()
 
 </script>
 
